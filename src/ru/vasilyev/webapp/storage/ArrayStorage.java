@@ -10,16 +10,17 @@ import java.util.Arrays;
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size = 0;
+
     public void clear() {
-        Arrays.fill(storage,0,size,null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    public void update (Resume r){
+    public void update(Resume r) {
         int res = searchIndex(r.getUuid());
-        if (res != -1){
+        if (res != -1) {
             storage[res] = r;
-        }else {
+        } else {
             System.out.println("Resume " + r.getUuid() + " not found");
         }
 
@@ -27,14 +28,15 @@ public class ArrayStorage {
 
     public void save(Resume r) {
 
-        if ( size == storage.length){
+        if (size == storage.length) {
             System.out.println("storage full!, not save!");
-        }else {
-            if (searchIndex(r.getUuid()) == -1){
+        } else {
+            if (searchIndex(r.getUuid()) == -1) {
                 storage[size] = r;
                 size++;
-            }else {
-                System.out.println("DataBase have: " + r.getUuid() + " not save");;
+            } else {
+                System.out.println("DataBase have: " + r.getUuid() + " not save");
+                ;
             }
         }
 
@@ -42,9 +44,9 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         int res = searchIndex(uuid);
-        if (res != -1){
-           return storage[res];
-        }else {
+        if (res != -1) {
+            return storage[res];
+        } else {
             System.out.println("Resume " + uuid + " not found");
         }
         return null;
@@ -53,11 +55,11 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         int res = searchIndex(uuid);
-        if (res != -1){
+        if (res != -1) {
             storage[res] = storage[size - 1];
             storage[size - 1] = null;
             size--;
-        }else {
+        } else {
             System.out.println("Resume " + uuid + " not found");
         }
     }
@@ -66,14 +68,14 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        return  Arrays.copyOfRange(storage,0, size);
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     public int size() {
         return size;
     }
 
-    private int searchIndex(String uuid){
+    private int searchIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
