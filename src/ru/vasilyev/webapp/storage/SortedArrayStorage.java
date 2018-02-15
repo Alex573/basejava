@@ -4,10 +4,8 @@ import ru.vasilyev.webapp.model.Resume;
 
 import java.util.Arrays;
 
-/**
- * Array based storage for Resumes
- */
-public class ArrayStorage extends AbstractArrayStorage implements Storage {
+
+public class SortedArrayStorage extends AbstractArrayStorage implements Storage {
 
 
     public void clear() {
@@ -68,7 +66,6 @@ public class ArrayStorage extends AbstractArrayStorage implements Storage {
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
-
 
 
     private int searchIndex(String uuid) {
