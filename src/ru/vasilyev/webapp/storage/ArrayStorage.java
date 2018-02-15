@@ -10,7 +10,6 @@ import java.util.Arrays;
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size = 0;
-    private boolean flag = false;
     public void clear() {
         for (int i = 0; i < size; i++) {
             storage[i] = null;
@@ -19,61 +18,50 @@ public class ArrayStorage {
     }
 
     public void update (Resume r){
-        flag = false;
-        for (int i = 0; i < size; i++) {
-            if (storage[i] == r) {
-                storage[i] = r;
-                flag = true;
-            }
+        int res = searchByObject(r);
+        if (res != -1){
+            storage[res] = r;
+        }else {
+            printNotFound();
         }
-        if (!flag){System.out.println("Not found!");}
 
     }
 
     public void save(Resume r) {
-
         if ( size == storage.length){
             System.out.println("storage full!, not save!");
         }else {
-            flag = false;
-            for (int i = 0; i < size; i++) {
-                if (storage[i] == r) {
-                    storage[size] = r;
-                    size++;
-                    flag = true;
-                    System.out.println("save good");
-                }
+            int res = searchByObject(r);
+            if (res == -1){
+                storage[size] = r;
+                size++;
+            }else {
+                System.out.println("DataBase have: " + r + " not save");;
             }
-            if (!flag){System.out.println("Not found!");}
         }
-
-
 
     }
 
     public Resume get(String uuid) {
-        flag = false;
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return storage[i];
-            }
+        int res = searchByUuid(uuid);
+        if (res != -1){
+           return storage[res];
+        }else {
+            printNotFound();
         }
-        if (!flag){System.out.println("Not found!");}
         return null;
 
     }
 
     public void delete(String uuid) {
-        flag = false;
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                flag = true;
-            }
+        int res = searchByUuid(uuid);
+        if (res != -1){
+            storage[res] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
+        }else {
+            printNotFound();
         }
-        if (!flag){System.out.println("Not found!");}
     }
 
     /**
@@ -87,7 +75,23 @@ public class ArrayStorage {
         return size;
     }
 
-//    private int searchByObject(Resume r){
-//
-//    }
+    private int searchByObject(Resume r){
+        for (int i = 0; i < size; i++) {
+            if (storage[i] == r) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    private int searchByUuid(String uuid){
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    private void printNotFound(){
+        System.out.println("Not found!");
+    }
 }
