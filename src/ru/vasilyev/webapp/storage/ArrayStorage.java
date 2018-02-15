@@ -51,6 +51,7 @@ public class ArrayStorage extends AbstractArrayStorage implements Storage {
 
     }
 
+
     public void delete(String uuid) {
         int res = searchIndex(uuid);
         if (res != -1) {
@@ -71,7 +72,7 @@ public class ArrayStorage extends AbstractArrayStorage implements Storage {
 
 
 
-    private int searchIndex(String uuid) {
+    protected int searchIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
