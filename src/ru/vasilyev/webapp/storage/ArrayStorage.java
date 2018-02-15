@@ -28,6 +28,7 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
+
         if ( size == storage.length){
             System.out.println("storage full!, not save!");
         }else {
