@@ -18,11 +18,11 @@ public class ArrayStorage {
     }
 
     public void update (Resume r){
-        int res = searchByObject(r);
+        int res = searchIndex(r.getUuid());
         if (res != -1){
             storage[res] = r;
         }else {
-            printNotFound();
+            System.out.println("Resume " + r.getUuid() + " not found");
         }
 
     }
@@ -31,36 +31,36 @@ public class ArrayStorage {
         if ( size == storage.length){
             System.out.println("storage full!, not save!");
         }else {
-            int res = searchByObject(r);
-            if (res == -1){
+
+            if (searchIndex(r.getUuid()) == -1){
                 storage[size] = r;
                 size++;
             }else {
-                System.out.println("DataBase have: " + r + " not save");;
+                System.out.println("DataBase have: " + r.getUuid() + " not save");;
             }
         }
 
     }
 
     public Resume get(String uuid) {
-        int res = searchByUuid(uuid);
+        int res = searchIndex(uuid);
         if (res != -1){
            return storage[res];
         }else {
-            printNotFound();
+            System.out.println("Resume " + uuid + " not found");
         }
         return null;
 
     }
 
     public void delete(String uuid) {
-        int res = searchByUuid(uuid);
+        int res = searchIndex(uuid);
         if (res != -1){
             storage[res] = storage[size - 1];
             storage[size - 1] = null;
             size--;
         }else {
-            printNotFound();
+            System.out.println("Resume " + uuid + " not found");
         }
     }
 
@@ -75,15 +75,7 @@ public class ArrayStorage {
         return size;
     }
 
-    private int searchByObject(Resume r){
-        for (int i = 0; i < size; i++) {
-            if (storage[i] == r) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    private int searchByUuid(String uuid){
+    private int searchIndex(String uuid){
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
@@ -91,7 +83,5 @@ public class ArrayStorage {
         }
         return -1;
     }
-    private void printNotFound(){
-        System.out.println("Not found!");
-    }
+
 }
