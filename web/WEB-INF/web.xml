@@ -5,11 +5,12 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>ResumeServlet</servlet-name>
-        <servlet-class>ru.vasilyev.webapp.web.ResumeServlet</servlet-class>
+        <servlet-name>resumeServlet</servlet-name>
+        <servlet-class>ru.javawebinar.basejava.web.ResumeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ResumeServlet</servlet-name>
+        <servlet-name>resumeServlet</servlet-name>
         <url-pattern>/resume</url-pattern>
     </servlet-mapping>
+
 </web-app>
