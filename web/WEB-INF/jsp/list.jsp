@@ -1,4 +1,4 @@
-<%@ page import="ru.javawebinar.basejava.model.ContactType" %>
+<%@ page import="ru.vasilyev.webapp.model.ContactType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -21,7 +21,7 @@
             <th></th>
         </tr>
         <c:forEach items="${resumes}" var="resume">
-            <jsp:useBean id="resume" type="ru.javawebinar.basejava.model.Resume"/>
+            <jsp:useBean id="resume" type="ru.vasilyev.webapp.model.Resume"/>
             <tr>
                 <td><a href="resume?uuid=${resume.uuid}&action=view">${resume.fullName}</a></td>
                 <td><%=ContactType.MAIL.toHtml(resume.getContact(ContactType.MAIL))%></td>
